@@ -1,0 +1,6 @@
+Flask-Caching
+SQLAlchemy
+Flask
+flask-cors
+gunicorn
+psycopg2-binary==2.9.1
