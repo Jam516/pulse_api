@@ -27,7 +27,7 @@ def after_request(response):
 
 @app.route('/ethereum/<time>')
 @cache.cached()
-def pulse(time):
+def get_ethereum(time):
     if int(time) >= 120:
         return 'Use a shorter timeslot'
     else:
@@ -39,7 +39,7 @@ def pulse(time):
 
 @app.route('/polygon/<time>')
 @cache.cached()
-def pulse(time):
+def get_polygon(time):
     if int(time) >= 120:
         return 'Use a shorter timeslot'
     else:
