@@ -4,6 +4,7 @@ from flask_caching import Cache
 import requests
 import os
 import pandas as pd
+import json
 
 config = {
     "CACHE_TYPE": "SimpleCache",
