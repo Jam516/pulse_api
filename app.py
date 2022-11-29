@@ -50,8 +50,9 @@ def get_ethereum(time):
         df['gas_growth'] = df.apply(lambda x: 100*(x['gas_spend'] - x['gas_spend_previous']), axis =1)
         df = df[df['accounts_growth']>0]
         df = df.sort_values(by=['accounts_growth'], ascending=False)
-        data = df.to_json(orient='records')
+        data = df.to_dict('records')
         x = {'results':data}
+        x = json.dumps(x)
         return x
 
 @app.route('/polygon/<time>')
