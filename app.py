@@ -50,7 +50,8 @@ def get_ethereum(time):
         df = df[df['accounts_growth']>0]
         df = df.sort_values(by=['accounts_growth'], ascending=False)
         data = df.to_json(orient='records')
-        return data
+        x = {'results':data}
+        return x
 
 @app.route('/polygon/<time>')
 @cache.cached()
