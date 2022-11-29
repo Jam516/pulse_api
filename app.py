@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_caching import Cache
 import requests
 import os
+import pandas as pd
 
 config = {
     "CACHE_TYPE": "SimpleCache",
