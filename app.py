@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_caching import Cache
+from flask import make_response
 import requests
 import os
 import pandas as pd
@@ -54,9 +55,8 @@ def get_ethereum(time):
         data = df.to_dict('records')
         x = {'results':data}
         x = json.dumps(x)
-        reponse = Response(response=x,
-        status=200,
-        mimetype="application/json")
+        response = make_response(json.dumps(x))
+        response.headers['content-type'] = 'application/json'
         return reponse
 
 @app.route('/polygon/<time>')
