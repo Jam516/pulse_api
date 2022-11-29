@@ -53,7 +53,10 @@ def get_ethereum(time):
         data = df.to_dict('records')
         x = {'results':data}
         x = json.dumps(x)
-        return x
+        reponse = Response(response=x,
+        status=200,
+        mimetype="application/json")
+        return reponse
 
 @app.route('/polygon/<time>')
 @cache.cached()
