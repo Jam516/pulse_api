@@ -47,11 +47,11 @@ def get_ethereum(time):
         df2 = df2[df2['active_accounts_previous']>5]
         df1 = df1[df1['active_accounts']>5]
         df = pd.merge(df1,df2,how='inner',on='contract',validate='1:1')
-        df['accounts_growth'] = df.apply(lambda x: 100*(x['active_accounts'] - x['active_accounts_previous'])/x['txns_previous'], axis =1)
-        df['txns_growth'] = df.apply(lambda x: 100*(x['txns'] - x['txns_previous'])/x['txns_previous'], axis =1)
-        df['gas_growth'] = df.apply(lambda x: 100*(x['gas_spend'] - x['gas_spend_previous'])/x['txns_previous'], axis =1)
-        df = df[df['accounts_growth']>0]
-        df = df.sort_values(by=['accounts_growth'], ascending=False)
+        df['accounts_percentage_growth'] = df.apply(lambda x: 100*(x['active_accounts'] - x['active_accounts_previous'])/x['txns_previous'], axis =1)
+        df['txns_percentage_growth'] = df.apply(lambda x: 100*(x['txns'] - x['txns_previous'])/x['txns_previous'], axis =1)
+        df['gas_spend_percentage_growth'] = df.apply(lambda x: 100*(x['gas_spend'] - x['gas_spend_previous'])/x['txns_previous'], axis =1)
+        df = df[df['accounts_percentage_growth']>0]
+        df = df.sort_values(by=['accounts_percentage_growth'], ascending=False)
         return df.to_json(orient='records')
 
 @app.route('/polygon/<time>')
