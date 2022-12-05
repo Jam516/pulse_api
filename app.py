@@ -9,7 +9,7 @@ import json
 
 config = {
     "CACHE_TYPE": "SimpleCache",
-    "CACHE_DEFAULT_TIMEOUT": 240
+    "CACHE_DEFAULT_TIMEOUT": 310
 }
 
 headers = {
