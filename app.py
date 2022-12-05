@@ -37,13 +37,13 @@ def get_ethereum(time):
         json_data1 = {
             'sql': ' SELECT  to_address AS contract,   COUNT(DISTINCT transaction_hash) AS txns,   COUNT(DISTINCT from_address) AS active_accounts,   SUM(gas_used*gas_price/1e18) AS gas_spend,   a.created_timestamp AS created_at FROM  ethereum.transactions t   LEFT JOIN  ethereum.accounts a ON t.to_address = a.address   LEFT JOIN ethereum.tokens tok ON t.to_address = tok.contract_address LEFT JOIN ethereum.collections col ON t.to_address = col.contract_address WHERE __confirmed = true  AND t.timestamp > now() - \''+str(time)+' minutes\'::interval   AND a.type = \'contract\'   AND tok.contract_address IS NULL AND col.contract_address IS NULL GROUP BY 1,5    ',
             "options": {
-                "timeout": 100
+                "timeout": 80
             }
         }
         json_data2 = {
             'sql': ' SELECT  to_address AS contract,   COUNT(DISTINCT transaction_hash) AS txns_previous,   COUNT(DISTINCT from_address) AS active_accounts_previous,   SUM(gas_used*gas_price/1e18) AS gas_spend_previous,   a.created_timestamp AS created_at FROM  ethereum.transactions t   LEFT JOIN  ethereum.accounts a ON t.to_address = a.address   LEFT JOIN ethereum.tokens tok ON t.to_address = tok.contract_address LEFT JOIN ethereum.collections col ON t.to_address = col.contract_address WHERE __confirmed = true   AND t.timestamp < now() - \''+str(time)+' minutes\'::interval AND t.timestamp > now() - \''+str(time)+' minutes\'::interval  - \''+str(time)+' minutes\'::interval AND a.type = \'contract\'   AND tok.contract_address IS NULL AND col.contract_address IS NULL GROUP BY 1,5    ',
             "options": {
-                "timeout": 100
+                "timeout": 80
             }
         }
         response1 = requests.post('https://sql.transpose.io', headers=headers, json=json_data1)
@@ -69,13 +69,13 @@ def get_polygon(time):
         json_data1 = {
             'sql': ' SELECT  to_address AS contract,   COUNT(DISTINCT transaction_hash) AS txns,   COUNT(DISTINCT from_address) AS active_accounts,   SUM(gas_used*gas_price/1e18) AS gas_spend,   a.created_timestamp AS created_at FROM  polygon.transactions t   LEFT JOIN  polygon.accounts a ON t.to_address = a.address   LEFT JOIN polygon.tokens tok ON t.to_address = tok.contract_address LEFT JOIN polygon.collections col ON t.to_address = col.contract_address WHERE __confirmed = true  AND t.timestamp > now() - \''+str(time)+' minutes\'::interval   AND a.type = \'contract\'   AND tok.contract_address IS NULL AND col.contract_address IS NULL GROUP BY 1,5    ',
             "options": {
-                "timeout": 300
+                "timeout": 80
             }
         }
         json_data2 = {
             'sql': ' SELECT  to_address AS contract,   COUNT(DISTINCT transaction_hash) AS txns_previous,   COUNT(DISTINCT from_address) AS active_accounts_previous,   SUM(gas_used*gas_price/1e18) AS gas_spend_previous,   a.created_timestamp AS created_at FROM  polygon.transactions t   LEFT JOIN  polygon.accounts a ON t.to_address = a.address   LEFT JOIN polygon.tokens tok ON t.to_address = tok.contract_address LEFT JOIN polygon.collections col ON t.to_address = col.contract_address WHERE __confirmed = true   AND t.timestamp < now() - \''+str(time)+' minutes\'::interval AND t.timestamp > now() - \''+str(time)+' minutes\'::interval  - \''+str(time)+' minutes\'::interval AND a.type = \'contract\'   AND tok.contract_address IS NULL AND col.contract_address IS NULL GROUP BY 1,5    ',
             "options": {
-                "timeout": 300
+                "timeout": 80
             }
         }
         response1 = requests.post('https://sql.transpose.io', headers=headers, json=json_data1)
