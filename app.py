@@ -46,8 +46,8 @@ def get_ethereum(time):
                 "timeout": 200
             }
         }
-        response1 = requests.post('https://sql.transpose.io', headers=headers, json=json_data1)
-        response2 = requests.post('https://sql.transpose.io', headers=headers, json=json_data2)
+        response1 = requests.post('https://api.transpose.io/sql', headers=headers, json=json_data1)
+        response2 = requests.post('https://api.transpose.io/sql', headers=headers, json=json_data2)
         df1 = pd.DataFrame(response1.json()['results'])
         df2 = pd.DataFrame(response2.json()['results'])
         df2 = df2[df2['active_accounts_previous']>5]
@@ -78,8 +78,8 @@ def get_polygon(time):
                 "timeout": 200
             }
         }
-        response1 = requests.post('https://sql.transpose.io', headers=headers, json=json_data1)
-        response2 = requests.post('https://sql.transpose.io', headers=headers, json=json_data2)
+        response1 = requests.post('https://api.transpose.io/sql', headers=headers, json=json_data1)
+        response2 = requests.post('https://api.transpose.io/sql', headers=headers, json=json_data2)
         df1 = pd.DataFrame(response1.json()['results'])
         df2 = pd.DataFrame(response2.json()['results'])
         df2 = df2[df2['active_accounts_previous']>5]
