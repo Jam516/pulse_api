@@ -8,8 +8,9 @@ import pandas as pd
 import json
 
 config = {
-    "CACHE_TYPE": "SimpleCache",
-    "CACHE_DEFAULT_TIMEOUT": 600
+    "CACHE_TYPE": "filesystem",
+    "CACHE_DIR": '/tmp',
+    "CACHE_DEFAULT_TIMEOUT": 300
 }
 
 headers = {
