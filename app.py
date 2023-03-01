@@ -10,7 +10,7 @@ import json
 config = {
     "CACHE_TYPE": "filesystem",
     "CACHE_DIR": '/tmp',
-    "CACHE_DEFAULT_TIMEOUT": 300
+    "CACHE_DEFAULT_TIMEOUT": 600
 }
 
 headers = {
