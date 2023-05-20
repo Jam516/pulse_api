@@ -8,8 +8,8 @@ import pandas as pd
 import json
 
 config = {
-    "CACHE_TYPE": "filesystem",
-    "CACHE_DIR": '/tmp',
+    "CACHE_TYPE": "redis",
+    "CACHE_REDIS_URL": os.environ.get('REDIS_URL'),
     "CACHE_DEFAULT_TIMEOUT": 600
 }
 
