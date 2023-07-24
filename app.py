@@ -37,6 +37,11 @@ CORS(app)
 #     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS')
 #     return response
 
+def make_cache_key(*args, **kwargs):
+    path = request.path
+    args = str(hash(frozenset(request.args.items())))
+    return (path + args).encode('utf-8')
+
 @app.route('/ethereum/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_ethereum(time):
