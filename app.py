@@ -7,10 +7,18 @@ import os
 import pandas as pd
 import json
 
+# config = {
+#     "CACHE_TYPE": "filesystem",
+#     "CACHE_DIR": '/tmp',
+#     "CACHE_DEFAULT_TIMEOUT": 600
+# }
+
+REDIS_LINK = os.environ['REDIS']
+
 config = {
-    "CACHE_TYPE": "filesystem",
-    "CACHE_DIR": '/tmp',
-    "CACHE_DEFAULT_TIMEOUT": 600
+    "CACHE_TYPE": "redis",
+    "CACHE_DEFAULT_TIMEOUT": 600,
+    "CACHE_REDIS_URL": REDIS_LINK
 }
 
 headers = {
@@ -23,14 +31,14 @@ app.config.from_mapping(config)
 cache = Cache(app)
 CORS(app)
 
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS')
-    return response
+# @app.after_request
+# def after_request(response):
+#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
+#     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS')
+#     return response
 
 @app.route('/ethereum/<time>')
-@cache.cached()
+@cache.memoize(make_name=make_cache_key)
 def get_ethereum(time):
     if int(time) >= 120:
         return 'Use a shorter timeslot'
@@ -62,7 +70,7 @@ def get_ethereum(time):
         return df.to_json(orient='records')
 
 @app.route('/polygon/<time>')
-@cache.cached()
+@cache.memoize(make_name=make_cache_key)
 def get_polygon(time):
     if int(time) >= 120:
         return 'Use a shorter timeslot'
@@ -94,7 +102,7 @@ def get_polygon(time):
         return df.to_json(orient='records')
 
 @app.route('/arbitrum/<time>')
-@cache.cached()
+@cache.memoize(make_name=make_cache_key)
 def get_arbitrum(time):
     if int(time) >= 120:
         return 'Use a shorter timeslot'
