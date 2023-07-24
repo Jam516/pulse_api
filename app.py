@@ -31,11 +31,11 @@ app.config.from_mapping(config)
 cache = Cache(app)
 CORS(app)
 
-# @app.after_request
-# def after_request(response):
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS')
-#     return response
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS')
+    return response
 
 def make_cache_key(*args, **kwargs):
     path = request.path
