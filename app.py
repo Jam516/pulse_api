@@ -13,7 +13,7 @@ import json
 #     "CACHE_DEFAULT_TIMEOUT": 600
 # }
 
-REDIS_LINK = os.environ['REDIS']
+REDIS_LINK = os.environ['REDIS_URL']
 
 config = {
     "CACHE_TYPE": "redis",
