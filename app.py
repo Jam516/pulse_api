@@ -20,7 +20,7 @@ REDIS_LINK = os.environ['REDIS_URL']
 
 config = {
     "CACHE_TYPE": "redis",
-    "CACHE_DEFAULT_TIMEOUT": 3600,
+    "CACHE_DEFAULT_TIMEOUT": 21600,
     "CACHE_REDIS_URL": REDIS_LINK
 }
 
@@ -144,11 +144,17 @@ def get_arbitrum(time):
 @app.route('/ethereum_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_ethereum_tc(time):
+    if time == 'day':
+        param = "'1' day"
+    elif time == 'week':
+        param = "'7' day"
+    elif time == 'month':
+        param = "'1' month"
     query = QueryBase(
         name="tc_new_eth",
         query_id=3027612,
         params=[
-        QueryParameter.text_type(name="time", value=time),
+        QueryParameter.text_type(name="time", value=param),
         ],
     )
 
