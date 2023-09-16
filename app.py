@@ -141,20 +141,20 @@ def get_arbitrum(time):
         df = df.sort_values(by=['accounts_percentage_growth'], ascending=False)
         return df.to_json(orient='records')
     
-# @app.route('/ethereum_tc/<time>')
-# @cache.memoize(make_name=make_cache_key)
-# def get_ethereum(time):
-#     query = QueryBase(
-#         name="tc_new",
-#         query_id=3027612,
-#         params=[
-#         QueryParameter.text_type(name="time", value=time),
-#         ],
-#     )
+@app.route('/ethereum_tc/<time>')
+@cache.memoize(make_name=make_cache_key)
+def get_ethereum_tc(time):
+    query = QueryBase(
+        name="tc_new",
+        query_id=3027612,
+        params=[
+        QueryParameter.text_type(name="time", value=time),
+        ],
+    )
 
-#     dune = DuneClient.from_env()
-#     results = dune.run_query_dataframe(query)
-#     return results.to_json(orient='records')
+    dune = DuneClient.from_env()
+    results = dune.run_query_dataframe(query)
+    return results.to_json(orient='records')
 
 if __name__ == '__main__':
     app.run()
