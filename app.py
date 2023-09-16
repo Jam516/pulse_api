@@ -165,11 +165,17 @@ def get_ethereum_tc(time):
 @app.route('/arbitrum_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_arbitrum_tc(time):
+    if time == 'day':
+        param = "'1' day"
+    elif time == 'week':
+        param = "'7' day"
+    elif time == 'month':
+        param = "'1' month"    
     query = QueryBase(
         name="tc_new_arb",
         query_id=3029500,
         params=[
-        QueryParameter.text_type(name="time", value=time),
+        QueryParameter.text_type(name="time", value=param),
         ],
     )
 
@@ -180,11 +186,17 @@ def get_arbitrum_tc(time):
 @app.route('/optimism_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_optimism_tc(time):
+    if time == 'day':
+        param = "'1' day"
+    elif time == 'week':
+        param = "'7' day"
+    elif time == 'month':
+        param = "'1' month"     
     query = QueryBase(
         name="tc_new_op",
         query_id=3029431,
         params=[
-        QueryParameter.text_type(name="time", value=time),
+        QueryParameter.text_type(name="time", value=param),
         ],
     )
 
@@ -195,11 +207,17 @@ def get_optimism_tc(time):
 @app.route('/base_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_base_tc(time):
+    if time == 'day':
+        param = "'1' day"
+    elif time == 'week':
+        param = "'7' day"
+    elif time == 'month':
+        param = "'1' month"  
     query = QueryBase(
         name="tc_new_base",
         query_id=3029480,
         params=[
-        QueryParameter.text_type(name="time", value=time),
+        QueryParameter.text_type(name="time", value=param),
         ],
     )
 
@@ -210,11 +228,17 @@ def get_base_tc(time):
 @app.route('/polygon_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
 def get_polygon_tc(time):
+    if time == 'day':
+        param = "'1' day"
+    elif time == 'week':
+        param = "'7' day"
+    elif time == 'month':
+        param = "'1' month"  
     query = QueryBase(
         name="tc_new_poly",
         query_id=3029509,
         params=[
-        QueryParameter.text_type(name="time", value=time),
+        QueryParameter.text_type(name="time", value=param),
         ],
     )
 
