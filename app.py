@@ -152,7 +152,7 @@ def get_ethereum_tc(time):
         ],
     )
 
-    dune = DuneClient.from_env()
+    dune = DuneClient(os.environ["DUNE_API_KEY"])
     results = dune.run_query_dataframe(query)
     return results.to_json(orient='records')
 
