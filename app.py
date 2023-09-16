@@ -20,7 +20,7 @@ REDIS_LINK = os.environ['REDIS_URL']
 
 config = {
     "CACHE_TYPE": "redis",
-    "CACHE_DEFAULT_TIMEOUT": 600,
+    "CACHE_DEFAULT_TIMEOUT": 3600,
     "CACHE_REDIS_URL": REDIS_LINK
 }
 
@@ -145,8 +145,68 @@ def get_arbitrum(time):
 @cache.memoize(make_name=make_cache_key)
 def get_ethereum_tc(time):
     query = QueryBase(
-        name="tc_new",
+        name="tc_new_eth",
         query_id=3027612,
+        params=[
+        QueryParameter.text_type(name="time", value=time),
+        ],
+    )
+
+    dune = DuneClient(os.environ["DUNE_API_KEY"])
+    results = dune.refresh_into_dataframe(query)
+    return results.to_json(orient='records')
+
+@app.route('/arbitrum_tc/<time>')
+@cache.memoize(make_name=make_cache_key)
+def get_ethereum_tc(time):
+    query = QueryBase(
+        name="tc_new_arb",
+        query_id=3029500,
+        params=[
+        QueryParameter.text_type(name="time", value=time),
+        ],
+    )
+
+    dune = DuneClient(os.environ["DUNE_API_KEY"])
+    results = dune.refresh_into_dataframe(query)
+    return results.to_json(orient='records')
+
+@app.route('/optimism_tc/<time>')
+@cache.memoize(make_name=make_cache_key)
+def get_ethereum_tc(time):
+    query = QueryBase(
+        name="tc_new_op",
+        query_id=3029431,
+        params=[
+        QueryParameter.text_type(name="time", value=time),
+        ],
+    )
+
+    dune = DuneClient(os.environ["DUNE_API_KEY"])
+    results = dune.refresh_into_dataframe(query)
+    return results.to_json(orient='records')
+
+@app.route('/base_tc/<time>')
+@cache.memoize(make_name=make_cache_key)
+def get_ethereum_tc(time):
+    query = QueryBase(
+        name="tc_new_base",
+        query_id=3029480,
+        params=[
+        QueryParameter.text_type(name="time", value=time),
+        ],
+    )
+
+    dune = DuneClient(os.environ["DUNE_API_KEY"])
+    results = dune.refresh_into_dataframe(query)
+    return results.to_json(orient='records')
+
+@app.route('/polygon_tc/<time>')
+@cache.memoize(make_name=make_cache_key)
+def get_ethereum_tc(time):
+    query = QueryBase(
+        name="tc_new_poly",
+        query_id=3029509,
         params=[
         QueryParameter.text_type(name="time", value=time),
         ],
