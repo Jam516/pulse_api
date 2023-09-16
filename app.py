@@ -158,7 +158,7 @@ def get_ethereum_tc(time):
 
 @app.route('/arbitrum_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
-def get_ethereum_tc(time):
+def get_arbitrum_tc(time):
     query = QueryBase(
         name="tc_new_arb",
         query_id=3029500,
@@ -173,7 +173,7 @@ def get_ethereum_tc(time):
 
 @app.route('/optimism_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
-def get_ethereum_tc(time):
+def get_optimism_tc(time):
     query = QueryBase(
         name="tc_new_op",
         query_id=3029431,
@@ -188,7 +188,7 @@ def get_ethereum_tc(time):
 
 @app.route('/base_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
-def get_ethereum_tc(time):
+def get_base_tc(time):
     query = QueryBase(
         name="tc_new_base",
         query_id=3029480,
@@ -203,7 +203,7 @@ def get_ethereum_tc(time):
 
 @app.route('/polygon_tc/<time>')
 @cache.memoize(make_name=make_cache_key)
-def get_ethereum_tc(time):
+def get_polygon_tc(time):
     query = QueryBase(
         name="tc_new_poly",
         query_id=3029509,
