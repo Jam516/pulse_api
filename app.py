@@ -153,7 +153,7 @@ def get_ethereum_tc(time):
     )
 
     dune = DuneClient(os.environ["DUNE_API_KEY"])
-    results = dune.run_query_dataframe(query)
+    results = dune.refresh_into_dataframe(query)
     return results.to_json(orient='records')
 
 if __name__ == '__main__':
