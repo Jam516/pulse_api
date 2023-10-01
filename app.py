@@ -20,7 +20,7 @@ REDIS_LINK = os.environ['REDIS_URL']
 
 config = {
     "CACHE_TYPE": "redis",
-    "CACHE_DEFAULT_TIMEOUT": 21600,
+    "CACHE_DEFAULT_TIMEOUT": 43200,
     "CACHE_REDIS_URL": REDIS_LINK
 }
 
